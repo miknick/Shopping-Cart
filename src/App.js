@@ -9,7 +9,18 @@ import { useState } from "react"
 import Cart from "./Compenents/Cart"
 function App() {
   const [loadCart, setLoadCart] = useState(false)
-  const [cartList, setCartList] = useState([])
+  const [cartList, setCartList] = useState([{
+    id: 7,
+    name: "Air Jordan 1 Mid",
+    price: 200,
+    img: "airJordan1Mid.jpg"
+  },
+  {
+    id: 8,
+    name: "Nike Lebron XVII Low",
+    price: 150,
+    img: "nikeLebronXVIILow.jpg"
+  },])
   const addToCart = (item) => {
     setCartList([...cartList, item])
   }

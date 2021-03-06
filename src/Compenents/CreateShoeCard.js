@@ -2,15 +2,17 @@ import React from 'react'
 import { Card, Col } from 'react-bootstrap'
 import { Link } from "react-router-dom"
 function CreateShoeCard(props) {
+
     return (
 
-        <Col className="p-1" sm={6} lg={4}>
+        < Col className="p-1" sm={6} lg={4} >
 
             <Card className="shoeCard"  >
                 <Link to={{
                     pathname: `${props.name}-details`
                     ,
                     state: {
+                        id: props.id,
                         name: props.name,
                         price: props.price,
                         img: props.img
@@ -25,6 +27,7 @@ function CreateShoeCard(props) {
                         pathname: `${props.name}-details`
                         ,
                         state: {
+                            id: props.id,
                             name: props.name,
                             price: props.price,
                             img: props.img

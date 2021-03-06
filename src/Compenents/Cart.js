@@ -4,15 +4,36 @@ import { useState, useEffect } from "react"
 import CreateCartCard from './CreateCartCard'
 
 function Cart(props) {
-    const [subtotal, setSubtotal] = useState(0)
-    const [pairs, setPairs] = useState([])
 
-    function addToPairs(pair) {
-        setPairs([...pairs, pair])
+    const [shoes, setShoes] = useState()
+    useEffect(() => {
+        setShoes(props.items)
+    }, [props.items])
+
+    const [subtotal, setSubtotal] = useState(0)
+
+    const findTotal = () => {
+        setSubtotal(() => {
+            let total = 0
+            shoes.map(shoe => {
+                total += (shoe.price * shoe.pair)
+            })
+            return total
+        })
     }
+    const addPairs = (id, pair) => {
+        const updatedState = shoes.map((shoe) => {
+            if (shoe.id === id)
+                shoe["pair"] = pair
+            return shoe
+        })
+        setShoes(updatedState)
+        findTotal()
+    }
+
     const compenent = props.items.map((item) => {
         return (
-            <CreateCartCard addToPairs={addToPairs} key={item.id} props={item}  >            </CreateCartCard>
+            <CreateCartCard addPairs={addPairs} key={item.id} props={item}  >            </CreateCartCard>
         )
     })
     return (

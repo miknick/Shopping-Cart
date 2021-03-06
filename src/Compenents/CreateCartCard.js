@@ -3,15 +3,13 @@ import { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 function CreateCartCard(props) {
     const [item, setItem] = useState(props.props)
-    const [pair, setPairs] = useState(1)
-
-    console.log(props)
+    const [pair, setPair] = useState(1)
     const handleChange = (e) => {
-        setPairs(e.target.value)
-        props.addToPairs(pair)
-
+        setPair(e.target.value)
     }
-
+    useEffect(() => {
+        props.addPairs(item.id, pair)
+    }, [pair])
     return (
         <Container className="text-center mt-4" >
             <Row className="d-flex align-items-center">
