@@ -11,15 +11,16 @@ function CreateCartCard(props) {
         props.addPairs(item.id, pair)
     }, [pair])
     return (
-        <Container className="text-center mt-4" >
+        <Container className=" mt-4" >
             <Row className="d-flex align-items-center">
                 <Col>
                     <img className="cartImg" alt={item.name} src={item.img} ></img>
                 </Col>
                 <Col >
-                    <h2 >${item.price}</h2>
-                    <h2 >{item.name}</h2>
-                    <input
+
+                    <h2  >{item.name}</h2>
+                    <h2  >${item.price}</h2>
+                    <input type="number"
                         onKeyPress={(e) => {
                             if (!/[0-9]/.test(e.key)) {
                                 e.preventDefault();
