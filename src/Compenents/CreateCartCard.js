@@ -1,15 +1,11 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 function CreateCartCard(props) {
     const [item, setItem] = useState(props.props)
-    const [pair, setPair] = useState(1)
     const handleChange = (e) => {
-        setPair(e.target.value)
+        props.addPairs(item.id, e.target.value)
     }
-    useEffect(() => {
-        props.addPairs(item.id, pair)
-    }, [pair])
     return (
         <Container className=" mt-4" >
             <Row className="d-flex align-items-center">
@@ -28,7 +24,7 @@ function CreateCartCard(props) {
 
                         }}
                         onChange={handleChange}
-                        value={pair}
+                        defaultValue={item.pair}
                     />
 
                 </Col>

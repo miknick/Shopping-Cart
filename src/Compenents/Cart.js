@@ -1,54 +1,20 @@
 import React from 'react'
-import { Modal, Button, Container, Card, Row, Col, Alert, } from 'react-bootstrap'
-import { useState, useEffect } from "react"
+import { Modal, Button, Container, Row, Col, } from 'react-bootstrap'
+import { useEffect } from "react"
 import CreateCartCard from './CreateCartCard'
-import { HddNetwork } from 'react-bootstrap-icons'
 import { Link } from "react-router-dom"
 function Cart(props) {
-
-    const [shoes, setShoes] = useState()
     useEffect(() => {
-        setShoes(props.items)
-    }, [props.items])
-
-    const [subtotal, setSubtotal] = useState(0)
-
-    const findTotal = () => {
-        setSubtotal(() => {
-            let total = 0
-            shoes.map(shoe => {
-                total += (shoe.price * shoe.pair)
-            })
-            return total
-        })
-    }
-    function deleteShoe(index) {
-        if (index || index === 0) {
-            const updatedState = [...shoes]
-            updatedState.splice(index, 1)
-            setShoes(updatedState)
+        if (props.shoes) {
+            const badge = document.getElementById("navBadge")
+            badge.innerHTML = props.shoes.length ? props.shoes.length : ""
         }
-    }
-    const addPairs = (id, pair) => {
-        let index = null
-        const updatedState = shoes.map((shoe) => {
-            if (shoe.id === id) {
-                if (!pair || pair === "0")
-                    index = shoes.indexOf(shoe)
-                shoe["pair"] = pair
-            }
-            return shoe
-        })
+    }, [props.shoes])
 
-        setShoes(updatedState)
-        deleteShoe(index)
-        findTotal()
-    }
-
-    const compenent = shoes && shoes.map((item) => {
+    const compenent = props.shoes && props.shoes.map((item) => {
         {
             return (
-                <CreateCartCard addPairs={addPairs} key={item.id} props={item}  >            </CreateCartCard>
+                <CreateCartCard addPairs={props.addPairs} key={item.id} props={item}  ></CreateCartCard>
             )
         }
 
@@ -65,7 +31,9 @@ function Cart(props) {
                 </Row>
                 <Row>
                     <Col>
-                        <img className="emptyCart w-50 mb-5" src="emptyCart.jpg" ></img>
+                        <img className="emptyCart w-50 mb-5" src="emptyCart.jpg" alt="empty cart">
+
+                        </img>
 
                     </Col>
                 </Row>
@@ -82,14 +50,14 @@ function Cart(props) {
         )
     }
     const subtotalCompenent = () => {
-        if (!subtotal)
+        if (!props.subtotal)
             return ("")
         else
             return (
                 <Container className="m-2" >
                     <Row>
                         <Col>
-                            <h2>Subtotal:${subtotal}</h2>
+                            <h2>Subtotal:${props.subtotal}</h2>
                         </Col>
                         <Col>
                             <Button className="float-right" size={"lg"} variant="outline-info" >Checkout</Button>
@@ -107,7 +75,7 @@ function Cart(props) {
             <Modal.Body>
                 <Button onClick={() => props.setShow(false)} variant="light float-right">X</Button>
                 <h1 className="mt-4">Your Shopping Bag</h1>
-                {shoes && shoes.length > 0 ? compenent : emptyCart()}
+                {props.shoes && props.shoes.length > 0 ? compenent : emptyCart()}
                 {subtotalCompenent()}
             </Modal.Body>
         </Modal>

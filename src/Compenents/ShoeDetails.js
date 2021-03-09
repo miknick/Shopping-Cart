@@ -14,7 +14,8 @@ function ShoeDetails(props) {
                 <Col className="  text-center">
                     <h1 className="display-4">{state.name}</h1>
                     <h1 className="display-4" >${state.price}</h1>
-                    <Button onClick={() => props.addToCart(state)} className="mt-4" variant="outline-info" block >Add To Cart  </Button>
+                    <Button onClick={() => props.addToCart(state)} className="mt-4"
+                        variant="outline-info" block >Add To Cart  </Button>
                 </Col>
             </Row>
             <Row>

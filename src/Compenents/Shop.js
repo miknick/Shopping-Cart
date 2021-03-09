@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Card, CardDeck, Container, Row, Col } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 import data from "../data"
 import CreateShoeCard from './CreateShoeCard'
 function Shop() {
-
     const [shoes] = useState(data)
     const compenent = shoes.map((shoe) => {
         return (
@@ -12,13 +11,16 @@ function Shop() {
         )
     })
     return (
-        <Container  >
+        <Container className="mt-5" >
+
+
             <Row>
 
                 {compenent}
 
             </Row>
         </Container>
+
     )
 }
 
