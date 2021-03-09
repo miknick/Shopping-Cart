@@ -19,7 +19,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 .homeImg{
-  background-image: url("/homeImg1.jpg");
+  background-image: url("homeImg1.jpg");
   background-position-y:50%;
   background-position-x:center;
 
